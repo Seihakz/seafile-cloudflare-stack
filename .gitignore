@@ -1,0 +1,57 @@
+# ============================================================
+# SECRET MATERIAL — NEVER COMMIT ANY OF THESE
+# ============================================================
+
+# Live environment files (contain every production secret)
+.env
+.env.*
+!.env.example
+*.env
+!*.env.example
+
+# Cloudflare Tunnel credentials (locally-managed tunnels)
+*.json
+!config-examples/*.json.example
+cert.pem
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ============================================================
+# PERSISTENT DATA / RUNTIME STATE
+# ============================================================
+seafile-data/
+seafile-mysql/
+seadoc-data/
+seafile-caddy/
+**/db/
+data/
+logs/
+*.log
+
+# ============================================================
+# BACKUPS & DUMPS
+# ============================================================
+*.sql
+*.sql.gz
+*.dump
+*.tar
+*.tar.gz
+*.tgz
+*.bak
+*.old
+*.orig
+*~
+seafile-backup*/
+
+# ============================================================
+# OS / EDITOR / MISC
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp

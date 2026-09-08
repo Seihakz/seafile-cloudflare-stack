@@ -1,0 +1,26 @@
+# ============================================================
+# OPTIONAL: Locally-managed Cloudflare Tunnel configuration
+# ============================================================
+# The production setup uses a REMOTELY-MANAGED tunnel (dashboard
+# ingress rules + TUNNEL_TOKEN in .env), which is preferred:
+# no credential files on disk, no local config to keep in sync.
+#
+# Use this file only if you need local ingress control. Rename to
+# config.yml, mount it into the cloudflared container, and generate
+# credentials with:  cloudflared tunnel login && cloudflared tunnel create seafile
+# The resulting <tunnel-id>.json and cert.pem MUST stay out of git.
+
+tunnel: <your-tunnel-uuid>
+credentials-file: /etc/cloudflared/<your-tunnel-uuid>.json
+
+ingress:
+  # Everything through Caddy — it routes /socket.io and /sdoc-server to seadoc
+  - hostname: seafile.yourdomain.com
+    service: http://seafile-caddy:80
+  - hostname: seafile.yourdomain.com
+    path: ^/socket\.io
+    service: http://seadoc:80
+  - hostname: seafile.yourdomain.com
+    path: ^/sdoc-server
+    service: http://seadoc:80
+  - service: http_status:404
